@@ -12,7 +12,7 @@ import java.util.Collection;
 public class StudentService {
 
     @Autowired
-    @Qualifier("mongoData")
+    @Qualifier("mysql")
     private StudentDao studentDao;
 
     public Collection<Student> getAllStudents(){
