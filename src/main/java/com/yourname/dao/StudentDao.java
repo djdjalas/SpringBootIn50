@@ -1,6 +1,6 @@
-package com.yourname.Dao;
+package com.yourname.dao;
 
-import com.yourname.Entity.Student;
+import com.yourname.entity.Student;
 
 import java.util.Collection;
 

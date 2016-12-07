@@ -1,7 +1,7 @@
-package com.yourname.Service;
+package com.yourname.service;
 
-import com.yourname.Dao.StudentDao;
-import com.yourname.Entity.Student;
+import com.yourname.dao.StudentDao;
+import com.yourname.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

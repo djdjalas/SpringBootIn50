@@ -1,7 +1,7 @@
-package com.yourname.Controller;
+package com.yourname.controller;
 
-import com.yourname.Entity.Student;
-import com.yourname.Service.StudentService;
+import com.yourname.entity.Student;
+import com.yourname.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
