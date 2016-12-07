@@ -42,6 +42,7 @@ Thumbs.db
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+.idea/uiDesigner.xml
 
 # Sensitive or high-churn files:
 .idea/dataSources/
