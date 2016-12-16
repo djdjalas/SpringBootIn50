@@ -14,4 +14,9 @@ public interface StudentDao {
     void updateStudent(Student student);
 
     void insertStudentToDb(Student student);
+//    yourname.database.studentDevDB.selectall=SELECT id, name, course FROM students
+//    yourname.database.studentDevDB.insert=INSERT INTO students (name, course) VALUES (?, ?)
+//    yourname.database.studentDevDB.update=UPDATE students SET name = ?, course = ? WHERE id = ?
+//    yourname.database.studentDevDB.delete=DELETE FROM students WHERE id = ?
+//    yourname.database.studentDevDB.selectbyid=SELECT id, name, course FROM students where id = ?
 }

@@ -1,7 +1,9 @@
 package com.yourname.dao;
 
 import com.yourname.entity.Student;
+import com.yourname.queries.StudentsQueries;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,25 @@ public class MySqlStudentDaoImpl implements StudentDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private StudentsQueries studentsQueries;
+
+//    @Value("${yourname.database.students.query.selectall}")
+//    private String SELECT_ALL;
+//
+//    @Value("${yourname.database.students.query.selectallbyid}")
+//    private String SELECT_ALL_BY_ID;
+//
+//    @Value("${yourname.database.students.query.delete}")
+//    private String DELETE;
+//
+//    @Value("${yourname.database.students.query.update}")
+//    private String UPDATE;
+//
+//    @Value("${yourname.database.students.query.insert}")
+//    private String INSERT;
+
 
     private static class StudentRowMapper implements RowMapper<Student> {
 
@@ -33,16 +54,14 @@ public class MySqlStudentDaoImpl implements StudentDao {
     @Override
     public Collection<Student> getAllStudents() {
         // SELECT column_name(s) FROM table_name
-        final String sql = "SELECT id, name, course FROM students";
-        List<Student> students = jdbcTemplate.query(sql, new StudentRowMapper());
+        List<Student> students = jdbcTemplate.query(studentsQueries.getSelectall(), new StudentRowMapper());
         return students;
     }
 
     @Override
     public Student getStudentById(int id) {
         // SELECT column_name(s) FROM table_name where column = value
-        final String sql = "SELECT id, name, course FROM students where id = ?";
-        Student student = jdbcTemplate.queryForObject(sql, new StudentRowMapper(), id);
+        Student student = jdbcTemplate.queryForObject(studentsQueries.getSelectallbyid(), new StudentRowMapper(), id);
         return student;
     }
 
@@ -50,8 +69,7 @@ public class MySqlStudentDaoImpl implements StudentDao {
     public void removeStudentById(int id) {
         // DELETE FROM table_name
         // WHERE some_column = some_value
-        final String sql = "DELETE FROM students WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(studentsQueries.getDelete(), id);
     }
 
     @Override
@@ -59,21 +77,19 @@ public class MySqlStudentDaoImpl implements StudentDao {
         // UPDATE table_name
         // SET column1=value, column2=value2,...
         // WHERE some_column=some_value
-        final String sql = "UPDATE students SET name = ?, course = ? WHERE id = ?";
         final int id = student.getId();
         final String name = student.getName();
         final String course = student.getCourse();
-        jdbcTemplate.update(sql, new Object[]{name, course, id});
+        jdbcTemplate.update(studentsQueries.getUpdate(), new Object[]{name, course, id});
     }
 
     @Override
     public void insertStudentToDb(Student student) {
         // INSERT INTO table_name (column1, column2, column3,...)
         // VALUES (value1, value2, value3,...)
-        final String sql = "INSERT INTO students (name, course) VALUES (?, ?)";
         final String name = student.getName();
         final String course = student.getCourse();
-        jdbcTemplate.update(sql, new Object[]{name, course});
+        jdbcTemplate.update(studentsQueries.getInsert(), new Object[]{name, course});
 
     }
 }
