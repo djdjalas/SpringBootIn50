@@ -31,7 +31,7 @@ public class StudentController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteStudentById(@RequestBody Student student){
+    public void updateStudent(@RequestBody Student student){
         studentService.updateStudent(student);
     }
 
